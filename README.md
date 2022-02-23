@@ -34,7 +34,16 @@ Code to generate image using provided template
 		System.out.println("Image written.");
 
 ```
+You can use it as a Maven dependency. You can find the newest release on your right.
 
+```java
+<dependency>
+  <groupId>komp15</groupId>
+  <artifactId>cool-text-scrapper</artifactId>
+  <version>1.0.0</version>
+</dependency>
+
+```
 
 
 If you have any suggestions, please open issues or pull requests.
