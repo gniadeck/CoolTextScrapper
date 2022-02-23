@@ -75,6 +75,8 @@ public class CoolTextScrapper {
 	}
 	
 	
+	
+	
 
 	public  boolean getRandomLogoAndSaveToFileAsJPG(String text, File file) throws Exception {
 		
@@ -97,11 +99,12 @@ public class CoolTextScrapper {
 	}
 	
 	
-	public  boolean getRandomLogoAndSaveFileAsGIF(String text) throws Exception {
+	public boolean getRandomLogoAndSaveFileAsGIF(String text) throws Exception {
 		
 		BufferedImage img = getRandomLogo(text);
-		
-		ImageIO.write(img, "png", new File("/gif/" + text + ".gif"));
+		File file = new File("gif/");
+		file.mkdir();		
+		ImageIO.write(img, "gif", new File("gif/" + text + ".gif"));
 		
 		
 		return true;
@@ -111,8 +114,10 @@ public class CoolTextScrapper {
 	public  boolean getRandomLogoAndSaveFileAsPNG(String text) throws Exception {
 		
 		BufferedImage img = getRandomLogo(text);
+		File file = new File("png/");
+		file.mkdir();
 		
-		ImageIO.write(img, "png", new File("/png/" + text + ".png"));
+		ImageIO.write(img, "png", new File("png/" + text + ".png"));
 		
 		
 		return true;
@@ -127,6 +132,40 @@ public class CoolTextScrapper {
 		
 
 	    String url = this.getAvailableURLs().get(this.generator.nextInt(this.getAvailableURLs().size()));
+	    driver.get(url);
+
+	    List<WebElement> srcs;
+
+	    srcs = driver.findElements(By.xpath("/html/body/table/tbody/tr[2]/td[2]/div[1]/div/form/div[1]/table/tbody/tr[1]/td[2]/textarea"));
+	    
+	    srcs.get(0).clear();
+	    srcs.get(0).sendKeys(text);
+	    //wait for the preview to load
+	    Thread.sleep(5000);
+	    WebElement submitButton = driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[2]/center[2]/input"));
+
+	    submitButton.click();
+	    Thread.sleep(2500);
+	    System.out.println("...");
+	    WebElement downloadButton = driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[2]/center[1]/p[1]/a[1]"));
+
+	    
+	   String downloadURL =  downloadButton.getAttribute("href");
+	   System.out.println(downloadURL);
+
+
+	    
+
+		return download(downloadURL);
+	}
+	
+	public BufferedImage getRandomLogo(String text, String url) throws Exception {
+		
+ 
+		
+		FluentWait wait = new FluentWait(driver);
+		
+
 	    driver.get(url);
 
 	    List<WebElement> srcs;
