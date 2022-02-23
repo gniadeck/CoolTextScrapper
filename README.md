@@ -28,13 +28,14 @@ Code to generate image using provided template
 		
     		//generate buffered image from specified url, then save to /png path inside the projects root folder
 		BufferedImage test = coolTextScrapper.getRandomLogo("test", "https://cooltext.com/Logo-Design-Fire");
-
+		File dir = new File("png");
+		dir.mkdir();
 		ImageIO.write(test, "png", new File("png/test.png"));
 		
 		System.out.println("Image written.");
 
 ```
-You can use it as a Maven dependency. You can find the newest release on your right.
+You can use it as a Maven dependency. Please remember to configure your maven to work properly with GitHub packages, and to provide URLs.txt file in maven's resource folder. This won't be mandatory in the future release.
 
 ```java
 <dependency>
