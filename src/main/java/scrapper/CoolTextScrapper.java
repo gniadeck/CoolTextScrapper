@@ -51,14 +51,7 @@ public class CoolTextScrapper {
 		this.generator = new Random();
 		this.availableURLs = new ArrayList<String>();
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(CoolTextScrapper.class.getClassLoader().getResource("URLs.txt").getFile()))) {
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		       
-		    	this.availableURLs.add(line);
-		    	
-		    }
-		}
+		
 		
 		WebDriverManager.chromedriver().browserVersion("77.0.3865.40").setup();
 		ChromeOptions options = new ChromeOptions();
@@ -125,6 +118,21 @@ public class CoolTextScrapper {
 	
 	
 	public BufferedImage getRandomLogo(String text) throws Exception {
+		
+		//check if file was already loaded
+		if(this.availableURLs.size() == 0) {
+		try (BufferedReader br = new BufferedReader(new FileReader(CoolTextScrapper.class.getClassLoader().getResource("URLs.txt").getFile()))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       
+		    	this.availableURLs.add(line);
+		    	
+		    }
+		} catch(FileNotFoundException e) {
+			throw new Exception("URLs.txt not found. Please provide the file or add link parameter to getRandomLogo()");
+
+		}
+		}
 		
  
 		

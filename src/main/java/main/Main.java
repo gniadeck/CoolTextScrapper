@@ -30,15 +30,15 @@ public class Main {
 		//generate and save to /png path inside the projects root folder
 		Random random = new Random();
 		
-		for(int i = 0; i < 5; i++) {
-			coolTextScrapper.getRandomLogoAndSaveFileAsPNG(String.valueOf(random.nextInt(1000)));
-		}
+//		for(int i = 0; i < 5; i++) {
+//			coolTextScrapper.getRandomLogoAndSaveFileAsPNG(String.valueOf(random.nextInt(1000)));
+//		}
 		
 		
 		//generate buffered image from specified url, then save to /png path inside the projects root folder
-		BufferedImage test = coolTextScrapper.getRandomLogo("test", "https://cooltext.com/Logo-Design-Fire");
+		BufferedImage test = coolTextScrapper.getRandomLogo("pogczamp123", "https://cooltext.com/Logo-Design-Burning");
 
-		ImageIO.write(test, "png", new File("png/test.png"));
+		ImageIO.write(test, "GIF", new File("png/test.gif"));
 		
 		System.out.println("Image written.");
 		
